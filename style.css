@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat App UI</title>
+  <style>
+    /* --- Basic Reset --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #f2f3f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* --- Chat Container --- */
+    .chat-container {
+      width: 400px;
+      height: 600px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* --- Header --- */
+    .chat-header {
+      background-color: #0084ff;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    /* --- Messages Area --- */
+    .chat-messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background-color: #f9f9f9;
+    }
+
+    .message {
+      max-width: 75%;
+      padding: 10px 14px;
+      border-radius: 18px;
+      line-height: 1.4;
+      font-size: 15px;
+    }
+
+    .sent {
+      align-self: flex-end;
+      background-color: #0084ff;
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .received {
+      align-self: flex-start;
+      background-color: #e4e6eb;
+      border-bottom-left-radius: 4px;
+    }
+
+    /* --- Input Area --- */
+    .chat-input {
+      display: flex;
+      padding: 10px;
+      background-color: #fff;
+      border-top: 1px solid #ddd;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .chat-input button {
+      background-color: #0084ff;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      margin-left: 8px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .chat-input button:hover {
+      background-color: #006edc;
+    }
+
+    /* Scrollbar Style */
+    .chat-messages::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .chat-messages::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">Chat Application</div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="message received">Hi there! 👋</div>
+      <div class="message sent">Hey! How are you?</div>
+    </div>
+
+    <div class="chat-input">
+      <input type="text" id="messageInput" placeholder="Type a message..." />
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const sendBtn = document.getElementById('sendBtn');
+    const messageInput = document.getElementById('messageInput');
+    const chatMessages = document.getElementById('chatMessages');
+
+    // Function to add a message to chat
+    function addMessage(text, type) {
+      const msg = document.createElement('div');
+      msg.classList.add('message', type);
+      msg.textContent = text;
+      chatMessages.appendChild(msg);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Send button click event
+    sendBtn.addEventListener('click', () => {
+      const text = messageInput.value.trim();
+      if (text !== '') {
+        addMessage(text, 'sent');
+        messageInput.value = '';
+
+        // Simulate received message
+        setTimeout(() => {
+          addMessage('Got it! 👍', 'received');
+        }, 800);
+      }
+    });
+
+    // Enter key to send message
+    messageInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendBtn.click();
+    });
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat App UI</title>
+  <style>
+    /* --- Basic Reset --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #f2f3f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* --- Chat Container --- */
+    .chat-container {
+      width: 400px;
+      height: 600px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* --- Header --- */
+    .chat-header {
+      background-color: #0084ff;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    /* --- Messages Area --- */
+    .chat-messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background-color: #f9f9f9;
+    }
+
+    .message {
+      max-width: 75%;
+      padding: 10px 14px;
+      border-radius: 18px;
+      line-height: 1.4;
+      font-size: 15px;
+    }
+
+    .sent {
+      align-self: flex-end;
+      background-color: #0084ff;
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .received {
+      align-self: flex-start;
+      background-color: #e4e6eb;
+      border-bottom-left-radius: 4px;
+    }
+
+    /* --- Input Area --- */
+    .chat-input {
+      display: flex;
+      padding: 10px;
+      background-color: #fff;
+      border-top: 1px solid #ddd;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .chat-input button {
+      background-color: #0084ff;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      margin-left: 8px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .chat-input button:hover {
+      background-color: #006edc;
+    }
+
+    /* Scrollbar Style */
+    .chat-messages::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .chat-messages::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">Chat Application</div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="message received">Hi there! 👋</div>
+      <div class="message sent">Hey! How are you?</div>
+    </div>
+
+    <div class="chat-input">
+      <input type="text" id="messageInput" placeholder="Type a message..." />
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const sendBtn = document.getElementById('sendBtn');
+    const messageInput = document.getElementById('messageInput');
+    const chatMessages = document.getElementById('chatMessages');
+
+    // Function to add a message to chat
+    function addMessage(text, type) {
+      const msg = document.createElement('div');
+      msg.classList.add('message', type);
+      msg.textContent = text;
+      chatMessages.appendChild(msg);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Send button click event
+    sendBtn.addEventListener('click', () => {
+      const text = messageInput.value.trim();
+      if (text !== '') {
+        addMessage(text, 'sent');
+        messageInput.value = '';
+
+        // Simulate received message
+        setTimeout(() => {
+          addMessage('Got it! 👍', 'received');
+        }, 800);
+      }
+    });
+
+    // Enter key to send message
+    messageInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendBtn.click();
+    });
+  </script>
+</body>
+</html>
